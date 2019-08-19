@@ -1,0 +1,40 @@
+{
+  "name": "vscode-playcanvas-editor",
+  "version": "0.0.1",
+  "description": "Experiment with playcanvas editor plugin for VSCode",
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.helloWorld"
+	],
+	"main": "src",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.helloWorld",
+				"title": "Hello Webpack"
+			}
+		]
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Disorrder/vscode-playcanvas-editor.git"
+  },
+  "author": "Disorrder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Disorrder/vscode-playcanvas-editor/issues"
+  },
+  "homepage": "https://github.com/Disorrder/vscode-playcanvas-editor#readme"
+}
