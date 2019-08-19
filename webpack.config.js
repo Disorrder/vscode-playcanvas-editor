@@ -3,7 +3,7 @@ const os = require('os');
 const path = require('path');
 const webpack = require('webpack');
 
-__dirname = path.resolve(__dirname, ".."); // process.cwd();
+// __dirname = path.resolve(__dirname, ".."); // process.cwd();
 var cfg = {
     "path": {
         "api": "./api/",
@@ -26,16 +26,23 @@ module.exports = {
     target: "node",
     context: path.resolve(__dirname, cfg.path.src),
     entry: {
+        extension: "extension.js",
         main: "index.js",
     },
     output: {
         path: path.resolve(__dirname, cfg.path.build),
         publicPath: '/',
         filename: '[name].js',
-        library: '[name]'
+        library: '[name]',
+        libraryTarget: "commonjs2",
+        devtoolModuleFilenameTemplate: "../[resource-path]",
     },
     // devtool: flags.sourcemaps ? "cheap-source-map" : false,
     // devtool: "inline-source-map",
+    devtool: 'source-map',
+    externals: {
+        vscode: "commonjs vscode" // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
+    },
     resolve: {
         modules: [
             path.join(__dirname, "src"),
@@ -88,17 +95,17 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new WebpackNotifierPlugin({excludeWarnings: true}),
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
 
         new webpack.LoaderOptionsPlugin({
             debug: true
         }),
 
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.pug',
-            inject: 'body',
-        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index.html',
+        //     template: 'index.pug',
+        //     inject: 'body',
+        // }),
 
         new MiniCssExtractPlugin({}),
 
@@ -109,7 +116,7 @@ module.exports = {
         ]),
 
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify( require("../package.json").version ),
+            VERSION: JSON.stringify( require("./package.json").version ),
             REVISION: JSON.stringify( require("child_process").execSync('git rev-parse --short HEAD').toString().trim() ),
             BUILD_DATE: JSON.stringify( new Date().toJSON() ),
             // config params from CI
@@ -118,10 +125,10 @@ module.exports = {
     ]
 }
 
-const fs = require('fs');
-{ // check web app config
-    let toPath = path.resolve(__dirname, "src/config.js");
-    if (!fs.existsSync(toPath)) {
-        fs.writeFileSync(toPath, "export default {}");
-    }
-}
+// const fs = require('fs');
+// { // check web app config
+//     let toPath = path.resolve(__dirname, "src/config.js");
+//     if (!fs.existsSync(toPath)) {
+//         fs.writeFileSync(toPath, "export default {}");
+//     }
+// }

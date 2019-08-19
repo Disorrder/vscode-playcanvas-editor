@@ -11,10 +11,9 @@
                 "--extensionDevelopmentPath=${workspaceFolder}"
             ],
             "outFiles": [
-                "${workspaceFolder}/src/**/*.js"
-                // "${workspaceFolder}/.build/**/*.js"
+                "${workspaceFolder}/.build/**/*.js"
             ],
-            // "preLaunchTask": "npm: build"
+            "preLaunchTask": "npm: dev"
         }
     ]
 }
