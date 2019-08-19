@@ -1,7 +1,6 @@
 const vscode = require('vscode');
 
 function activate(context) {
-    console.log("qweqwe")
 	let disposable = vscode.commands.registerCommand('extension.playcanvas', () => {
 		vscode.window.showInformationMessage('TODO: open editor tab!');
 	});
@@ -15,5 +14,3 @@ module.exports = {
 	activate,
 	deactivate
 }
-
-console.log("ASDASD", module.exports);

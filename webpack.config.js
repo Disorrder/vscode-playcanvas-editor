@@ -26,7 +26,6 @@ module.exports = {
     target: "node",
     context: path.resolve(__dirname, cfg.path.src),
     entry: {
-        extension: "extension.js",
         main: "index.js",
     },
     output: {
@@ -34,12 +33,11 @@ module.exports = {
         publicPath: '/',
         filename: '[name].js',
         library: '[name]',
-        libraryTarget: "commonjs2",
-        devtoolModuleFilenameTemplate: "../[resource-path]",
+        // libraryTarget: "commonjs2",
+        // devtoolModuleFilenameTemplate: "../[resource-path]",
     },
     // devtool: flags.sourcemaps ? "cheap-source-map" : false,
     // devtool: "inline-source-map",
-    devtool: 'source-map',
     externals: {
         vscode: "commonjs vscode" // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
     },
@@ -95,7 +93,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new WebpackNotifierPlugin({excludeWarnings: true}),
-        // new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
 
         new webpack.LoaderOptionsPlugin({
             debug: true

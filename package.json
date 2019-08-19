@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Experiment with playcanvas editor plugin for VSCode",
   "scripts": {
-    "dev": "webpack --mode development",
+    "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,7 +26,7 @@
   "activationEvents": [
     "onCommand:extension.playcanvas"
   ],
-  "main": ".build/extension",
+  "main": "src/extension",
   "contributes": {
     "commands": [
       {
